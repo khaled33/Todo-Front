@@ -1,0 +1,127 @@
+<div class="card">
+  <div class="card-header border-transparent">
+    <h3 class="card-title">Latest Orders</h3>
+
+    <div class="card-tools">
+      <button
+        type="button"
+        class="btn btn-tool"
+        data-card-widget="collapse"
+      >
+        <i class="fas fa-minus"></i>
+      </button>
+      <button
+        type="button"
+        class="btn btn-tool"
+        data-card-widget="remove"
+      >
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+  </div>
+  <!-- /.card-header -->
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table m-0">
+        <thead>
+        <tr>
+          <th>#</th>
+          <th>ID</th>
+          <th>Label</th>
+          <th>Date Début</th>
+          <th>Echeance</th>
+          <th>Descripestion</th>
+          <th>Status</th>
+          <th>Date fin réelle</th>
+          <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of Todos">
+          <td>
+            <input type="checkbox" (change)="changerStatus(item)" *ngIf="item.status=='Cours'"  >
+          </td>
+          <td>
+            <a data-toggle="modal" #id id="{{item.id}}" style="color: cornflowerblue; cursor:  pointer"
+               data-target="#exampleModalCenter"
+               (click)="getTodo(id)">{{item.id}}</a>
+          </td>
+
+          <td>{{item.label}}</td>
+
+          <td>
+            {{item.dateDebut}}
+          </td>
+
+          <td>
+            {{item.echeance}}
+          </td>
+
+          <td>
+            {{item.descripestion}}
+          </td>
+          <td>
+            <span class="{{item.classColor}}"> {{item.status}}</span>
+          </td>
+          <td>
+            {{item.datefin}}
+          </td>
+          <td>
+            <button class="btn btn-default" (click)="delete(id)" style="text-align: center"><i
+              class="fas fa-trash "></i>
+            </button>
+
+            <button class="btn btn-default" (click)="update(id)" style="text-align: center"><i
+              class="fas fa fa-retweet "></i>
+            </button>
+          </td>
+        </tr>
+
+        </tbody>
+      </table>
+    </div>
+    <!-- /.table-responsive -->
+  </div>
+  <!-- /.card-body -->
+  <div class="card-footer clearfix">
+    <a
+      routerLink="/AddTache" class="btn btn-sm btn-info float-left"
+    >Place New Todo</a
+    >
+
+  </div>
+  <!-- /.card-footer -->
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+
+        <ul class="list-group list-group-flush" *ngIf="Todo">
+          <li class="list-group-item">ID : <strong style="margin-left:5%">{{Todo.id}}</strong></li>
+          <li class="list-group-item">Label: <strong style="margin-left:5%">{{Todo.label}}</strong></li>
+          <li class="list-group-item">Date Début :<strong style="margin-left:5%">{{Todo.dateDebut}}</strong></li>
+          <li class="list-group-item">Echeance :<strong style="margin-left:5%">{{Todo.echeance}}</strong></li>
+          <li class="list-group-item">Status :<strong style="margin-left:5%">{{Todo.status}}</strong></li>
+          <li class="list-group-item">Date fin réelle :<strong style="margin-left:5%">{{Todo.datefin}}</strong></li>
+          <li class="list-group-item">Descripestion :<strong style="margin-left:5%">{{Todo.descripestion}}</strong></li>
+        </ul>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
